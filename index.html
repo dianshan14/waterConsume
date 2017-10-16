@@ -11,8 +11,40 @@
     <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
+    <div style="text-align:center;">
+        <h2>各縣市年度用水量及用水人口與全國之比較</h2>
+        <br>
+        <select name="YES" id="drop-down-year">
+            <option value="---" selected="selected">---</option>
+            <option value="data2008">2008</option>
+            <option value="data2009">2009</option>
+            <option value="data2010">2010</option>
+            <option value="data2011">2011</option>
+            <option value="data2012">2012</option>
+            <option value="data2013">2013</option>
+            <option value="data2014">2014</option>
+            <option value="data2015">2015</option>
+            <option value="data2016">2016</option>
+        </select>
+        <select name="YES" id="drop-down-region"></select>
+        <button onClick="location.href=location.href">refresh</button>
+    </div>
+    <script>
+        $("#drop-down-region").append("<option value='---' selected='selected'>---</option>")
+        var region_list = ["宜蘭縣","花蓮縣","金門縣","南投縣","屏東縣","苗栗縣","桃園市","高雄市","基隆市","連江縣","雲林縣","新北市","新竹市","新竹縣","嘉義市","嘉義縣","彰化縣","臺中市","臺北市","臺東縣","臺南市","澎湖縣"];
+        for (var index = 0; index < 22; index++) {
+            $("#drop-down-region").append("<option value='"+region_list[index]+"'>"+region_list[index]+"</option>")
+        }
+    </script>
+    <br>
+    <div style="text-align:center; width: 49%;" class="div">
+        <h4>用水量佔全國比例</h4>
+    </div>
+    <div style="text-align:center; width: 49%;" class="div">
+        <h4>各縣市人口比例與用水比例之關係</h4>
+    </div>
     <script src="./js/pieChart.js"></script>
-    <!-- <script src="./js/slopeDiagram.js"></script> -->
+    <script src="./js/slopeDiagram.js"></script>
     <!-- <script src="./js/linechart.js"></script> -->
 </body>
 </html>
