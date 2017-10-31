@@ -121,9 +121,9 @@ d3.select("#drop-down-year")
 // event handler
 d3.selectAll(".pieGroup, .textGroup")
 .on("mouseenter", function(d,i){
-    
+    // .on function will pass event object (i) at parameter
     recoverPie();
-
+    console.log("look me:::::::::::", i);
     i = (i>21)?(i-22):i;
     var pieId = "#pie"+i,
         pieTextId = "#pietext"+i;
@@ -136,10 +136,20 @@ d3.selectAll(".pieGroup, .textGroup")
     d3.select(pieId)
     .attr('stroke', "blue")
     .attr('stroke-width', "3px");
-    console.log("enter  "+i +" and "+ pieId);
+
+    recoverSlope();
+    highlightASlope(i);
+
+    recoverCircle();
+    highlightTwoCircle(i);
 })
 .on("mouseout", function(d,i){
-    i = (i>21)?(i-22):i;
+
+    //remind: replace original recovery method with recoverPie()
+    recoverPie();
+    recoverSlope();
+    recoverCircle();
+/*     i = (i>21)?(i-22):i;
     var pieId = "#pie"+i,
         pieTextId = "#pietext"+i;
     console.log("out:   "+i);
@@ -149,27 +159,33 @@ d3.selectAll(".pieGroup, .textGroup")
  
     d3.select(pieId)
     .transition()
-    .attr('stroke', "none");
+    .attr('stroke', "none"); */
 
+    // back to reply region manu 
     var selectedRegion = d3.select("#drop-down-region").property("value");
-    for (var recover_index = 0; recover_index < 22; recover_index++) {
-        if(region_list[recover_index] === selectedRegion)
-        {
-            pieId = "#pie"+recover_index,
-            pieTextId = "#pietext"+recover_index;
-            break;
+    if(selectedRegion != "---"){
+        for (var recover_index = 0; recover_index < 22; recover_index++) {
+            if(region_list[recover_index] === selectedRegion)
+            {
+                var pieId = "#pie"+recover_index,
+                    pieTextId = "#pietext"+recover_index;
+                break;
+            }
         }
-    }
-    d3.select(pieId)
-    .attr('stroke', "blue")
-    .attr('stroke-width', "3px");
+        d3.select(pieId)
+        .attr('stroke', "blue")
+        .attr('stroke-width', "3px");
 
-    d3.select(pieTextId)
-    .style('fill', "red")
-    .attr('dx', function(d){ return (recover_index>=8&&recover_index<=10)?"10px":(recover_index>=12&&recover_index<=16)?"-20px":(recover_index==19)?"-25px":d3.select(this).attr('dx');})
-    .attr('dy', function(d){ return (recover_index>=0&&recover_index<=5)?"-15px":(recover_index>=8&&recover_index<=10)?"15px":(recover_index>=12&&recover_index<=16)?"20px":(recover_index==19||recover_index==21)?"-25px":d3.select(this).attr('dy');})
-    .text(region_list[recover_index]);
-    console.log("recover:   "+recover_index);
+        d3.select(pieTextId)
+        .style('fill', "red")
+        .attr('dx', function(d){ return (recover_index>=8&&recover_index<=10)?"10px":(recover_index>=12&&recover_index<=16)?"-20px":(recover_index==19)?"-25px":d3.select(this).attr('dx');})
+        .attr('dy', function(d){ return (recover_index>=0&&recover_index<=5)?"-15px":(recover_index>=8&&recover_index<=10)?"15px":(recover_index>=12&&recover_index<=16)?"20px":(recover_index==19||recover_index==21)?"-25px":d3.select(this).attr('dy');})
+        .text(region_list[recover_index]);
+        console.log("recover:   "+recover_index);
+
+        highlightASlope(recover_index);
+        highlightTwoCircle(recover_index);
+    }
 });
 
 d3.select("#drop-down-region")
@@ -178,27 +194,28 @@ d3.select("#drop-down-region")
     {
         recoverPie();
         var selectedRegion = d3.select("#drop-down-region").property("value");
-        for (var i = 0; i < 22; i++) {
-            if(region_list[i] === selectedRegion)
-            {
-                var pieId = "#pie"+i,
-                pieTextId = "#pietext"+i;
-                break;
+        if(selectedRegion != "---"){
+            for (var i = 0; i < 22; i++) {
+                if(region_list[i] === selectedRegion)
+                {
+                    var pieId = "#pie"+i,
+                    pieTextId = "#pietext"+i;
+                    break;
+                }
             }
-        }
 
-        d3.select(pieTextId)
-        .style('fill', "red")
-        .attr('dx', function(d){ return (i>=8&&i<=10)?"10px":(i>=12&&i<=16)?"-20px":(i==19)?"-25px":d3.select(this).attr('dx');})
-        .attr('dy', function(d){ return (i>=0&&i<=5)?"-15px":(i>=8&&i<=10)?"15px":(i>=12&&i<=16)?"20px":(i==19||i==21)?"-25px":d3.select(this).attr('dy');})
-        .text(region_list[i]);
+            d3.select(pieTextId)
+            .style('fill', "red")
+            .attr('dx', function(d){ return (i>=8&&i<=10)?"10px":(i>=12&&i<=16)?"-20px":(i==19)?"-25px":d3.select(this).attr('dx');})
+            .attr('dy', function(d){ return (i>=0&&i<=5)?"-15px":(i>=8&&i<=10)?"15px":(i>=12&&i<=16)?"20px":(i==19||i==21)?"-25px":d3.select(this).attr('dy');})
+            .text(region_list[i]);
 
-        d3.select(pieId)
-        .attr('stroke', "blue")
-        .attr('stroke-width', "3px");
-
+            d3.select(pieId)
+            .attr('stroke', "blue")
+            .attr('stroke-width', "3px");
+        } 
         // call slope update
-        slopeReplyRegionMenu(i); 
+        slopeReplyRegionMenu(i); // this update function will check region menu value whether is "---"
     }
 });
 
