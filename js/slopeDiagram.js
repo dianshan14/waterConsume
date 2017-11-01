@@ -1,6 +1,6 @@
 var slopemargin = {top: 40, right: 40, bottom: 40, left: 60},
 slopewidth = 500 - slopemargin.left - slopemargin.right,
-slopeheight = 500 - slopemargin.top - slopemargin.bottom;
+slopeheight = 480 - slopemargin.top - slopemargin.bottom;
 
 // svg 
 var slopecont = d3.select("body")
@@ -57,10 +57,14 @@ new_line.transition()
         .style('stroke', function(d){ return popScale(d.population/total_population)>conScale(d.consumption/total_consumption)?"red":"#00BFFF"})
         .style('stroke-width', "2px")
         .on("end", function(d,i){
-            if(i === highlight_index)
-            {
-                highlightASlope(i);
+            if(!d3.select(".myCheckbox").property("checked")){
+                if(i === highlight_index)
+                {
+                    highlightASlope(i);
+                }
             }
+            else
+                checkedCheckbox();
         });
 
 new_line.exit().transition().remove();
@@ -83,10 +87,14 @@ new_circle_L.transition()
         .style('stroke', function(d){ return popScale(d.population/total_population)>conScale(d.consumption/total_consumption)?"red":"#00BFFF"})
         .style('stroke-width', "2px")
         .on("end", function(d,i){
-            if(i === highlight_index)
-            {
-                highlightTwoCircle(highlight_index);
+            if(!d3.select(".myCheckbox").property("checked")){
+                if(i === highlight_index)
+                {
+                    highlightTwoCircle(highlight_index);
+                }
             }
+            else
+                checkedCheckbox();
         });
 
 new_circle_L.exit().transition().remove();
@@ -109,10 +117,14 @@ new_circle_R.transition()
         .style('stroke', function(d){ return popScale(d.population/total_population)>conScale(d.consumption/total_consumption)?"red":"#00BFFF"})
         .style('stroke-width', "2px")
         .on("end", function(d,i){
-            if(i === highlight_index)
-            {
-                highlightTwoCircle(highlight_index);
+            if(!d3.select(".myCheckbox").property("checked")){
+                if(i === highlight_index)
+                {
+                    highlightTwoCircle(highlight_index);
+                }
             }
+            else
+                checkedCheckbox();
         });
 
 new_circle_R.exit().transition().remove();
@@ -189,11 +201,12 @@ d3.selectAll(".slope")
 .each(function(d,index){
     if(index == slope_index){
         d3.select(this)
+            .attr('opacity', "1")
             .style('stroke-width', "7px");
     }
     else if(slope_index<=21 && slope_index>=0){
         d3.select(this)
-            .attr('opacity', "0.2");
+            .attr('opacity', "0.05");
     }
 });
 }
@@ -212,11 +225,12 @@ d3.selectAll(".circle")
     if(index == slope_index || (index-22) == slope_index){
         d3.select(this)
         .attr('r', "8px")
+        .attr('opacity', "1")
         .style('stroke-width', "7px");
     }
     else{
         d3.select(this)
-            .attr('opacity', "0.2")
+            .attr('opacity', "0.05")
             .style('z-index', "-1");
     }
 });

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sam's line chart</title>
+    <title>Sam's water chart</title>
     <script src="./js/data.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -12,7 +12,7 @@
 </head>
 <body>
     <div style="text-align:center;">
-        <h2>各縣市年度用水量及用水人口與全國之比較</h2>
+        <h2>用水知多少</h2>
         <br>
     </div>
     <div style="text-align:center;" class="deco">
@@ -30,6 +30,9 @@
         </select>
         <select name="YES" id="drop-down-region"></select>
         <button onClick="location.href=location.href">refresh</button>
+        <button id="clear">clear</button>
+        <br>
+        <input type="checkbox" class="myCheckbox" style="margin: 0;"> 用水量>人口
     </div>
     <script>
         $("#drop-down-region").append("<option value='---' selected='selected'>---</option>")
@@ -47,6 +50,19 @@
     </div>
     <script src="./js/pieChart.js"></script>
     <script src="./js/slopeDiagram.js"></script>
-    <!-- <script src="./js/linechart.js"></script> -->
+    <script src="./js/checkbox.js"></script>
+
+    <script>
+            d3.select("#clear").on("click", function(){
+                if(signal == 1){
+                    $("#drop-down-region").val("---");
+                    recoverPie();
+                    recoverSlope();
+                    recoverCircle();
+                    $(".tagRegion").remove();
+                    d3.select(".myCheckbox").property("checked", false);
+                }
+            });
+    </script>
 </body>
 </html>
