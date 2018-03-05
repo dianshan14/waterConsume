@@ -1,17 +1,19 @@
 d3.select(".myCheckbox").on("change", function(){
     if(signal == 1){
+        // recover all graph and react 'check box'
         recoverPie();
         recoverSlope();
         recoverCircle();
         $(".tagRegion").remove();
         if(d3.select(".myCheckbox").property("checked")){
-            checkedCheckbox();
+            if(signal == 1)
+                checkedCheckbox();
         }
     }
 });
 
 function checkedCheckbox(){
-    $(".tagRegion").remove();
+    //$(".tagRegion").remove();
     //highlight region where line is red
     d3.selectAll("line[style*='stroke: rgb(255, 0, 0)']")
     .attr('opacity', "1")

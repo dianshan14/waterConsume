@@ -12,3 +12,19 @@
 		* add event
 		* add highlight about red line
 	* add checkbox and its event
+* 2018/03/05 update
+	* Done
+		* implement uncomplicated RWD
+		* add new color
+		* add footer
+		* add some detail prompt of information  
+		* change most of style of text
+		* fix some bug
+			* Incorrect scale
+			* Incorrect formula
+		* let all of thing be better
+	* To-do
+		* time of display of footer is wrong
+		* some text should be more better
+		* style of circle of right graph shoud be changed  
+	
