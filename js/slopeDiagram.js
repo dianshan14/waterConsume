@@ -208,7 +208,9 @@ function render_slopeDiagram(new_data, highlight_index){
         .text("年用水量佔全國比例")
         // .attr('x', $("#slopesvg").width()*3/5)
         // .attr('x', $("#slopeGroup").offset().left - $(".right-div").offset().left + $("#slopesvg").width()*1/2)
-        .attr('x', $("#slopeGroup").offset().left - $("#slopesvg").offset().left + $("#slopesvg").width()*0.4)
+        .attr('x', (window.innerWidth > 768) ?
+            ($("#slopeGroup").offset().left - $("#slopesvg").offset().left + $("#slopesvg").width()*0.5) : 
+            ($("#slopeGroup").offset().left - $("#slopesvg").offset().left + $("#slopesvg").width()*0.4))
         //.attr('x', 350)
         .attr('y', slopeheight + slopemargin.top + slopemargin.bottom - 10)
         .attr('style', "fill: " + d3["schemeCategory10"][0] + "; font-size: 15px");
@@ -224,7 +226,7 @@ function render_slopeDiagram(new_data, highlight_index){
     // 30 for axis tag, 
     // 15~20 for average visiblity of graph, because graph have axis tag 
     var x_displace = ($("#slopesvg").width()-(axiswidth + 30 - 20))/2;
-    x_displace = window.innerWidth > 768 ? x_displace : (x_displace-30);
+    x_displace = window.innerWidth > 768 ? x_displace : (x_displace-40);
     d3.select("#slopeGroup").attr('transform', "translate("+ x_displace +","+slopemargin.top+")");
 }
 

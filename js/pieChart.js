@@ -72,7 +72,7 @@ function updatePieChart(new_data, highlight_index){
     // display extra data under pie chart
     if(signal == 1){
         $("#pie-year").html(d3.select("#drop-down-year").property("value").slice(4) + " 年");
-        $("#pie-total-population").html("總用水量人口數 ： " + total_population + "  人");
+        $("#pie-total-population").html("總用水人口數量 ： " + total_population + "  人");
         $("#pie-total-consumption").html("總用水量： " + total_consumption + " 千公升");
     }
 
@@ -244,14 +244,7 @@ d3.selectAll(".pieGroup, .textGroup")
 */
 
 function SVG_response(){
-    console.log("print");
-    console.log(window.innerWidth);
-    console.log(window.innerHeight);
-    pieAttr = pie.innerRadius(0)
-    .outerRadius(150)
-    .cornerRadius(3)
-    .padAngle(0.005)
-    .padRadius(150);
+    ;
 }
 
 d3.select("#drop-down-region")
