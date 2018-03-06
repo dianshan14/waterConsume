@@ -17,14 +17,7 @@ var pieScale = d3.arc()
 // data
 /* var cont = d3.select('body')
              .append("svg") */
-var cont = d3.select("#piesvg")
-             .attr('width', "480") //%
-             .attr('height', "450")
-             .attr('id', "piesvg")
-             .append("g")
-             .attr('transform', "translate("+($("#piesvg").width()/2)+","+(d3.select("#piesvg").attr("height")/2)+")")
-             .attr('id', "pieChartGroup")
-             .attr('opacity', "1");
+var cont;
 
 var signal = 0;
 
@@ -32,6 +25,36 @@ var signal = 0;
 var pieData = [];
 var data_source;
 var total_consumption = 0 , total_population = 0;
+
+
+$(function(){
+    if(window.innerWidth < 768){
+        pieAttr = pie.innerRadius(0)
+        .outerRadius(150)
+        .cornerRadius(3)
+        .padAngle(0.005)
+        .padRadius(150);
+
+        pieScale = d3.arc()
+        .innerRadius(0)
+        .outerRadius(175)
+        .cornerRadius(3)
+        .padAngle(0.005)
+        .padRadius(175);    
+    }
+
+    cont = d3.select("#piesvg")
+    .attr('width', window.innerWidth >= 768 ? "480" : "400") //%
+    .attr('height', window.innerWidth >= 768 ? "450" : "375")
+    .attr('id', "piesvg")
+    .append("g")
+    .attr('transform', "translate("+($("#piesvg").width()/2)+","+(d3.select("#piesvg").attr("height")/2)+")")
+    .attr('id', "pieChartGroup")
+    .attr('opacity', "1");
+
+    updatePieChart(data2016,undefined);
+});
+
 function updatePieChart(new_data, highlight_index){
 
     // if choose new year, 1. initial value 2. change data source
@@ -130,8 +153,6 @@ function updatePieChart(new_data, highlight_index){
     new_text.exit().transition().remove();
 }
 
-updatePieChart(data2016,undefined);
-
 d3.select("#drop-down-year")
   .on("change", function(){
     signal = 1;
@@ -222,8 +243,15 @@ d3.selectAll(".pieGroup, .textGroup")
 });
 */
 
-function prii(){
-    console.log("resize");
+function SVG_response(){
+    console.log("print");
+    console.log(window.innerWidth);
+    console.log(window.innerHeight);
+    pieAttr = pie.innerRadius(0)
+    .outerRadius(150)
+    .cornerRadius(3)
+    .padAngle(0.005)
+    .padRadius(150);
 }
 
 d3.select("#drop-down-region")

@@ -8,23 +8,41 @@ var slopemargin = {top: 40, right: 40, bottom: 40, left: 60},
     axiswidth = slopewidth + 10;
 
     // svg 
-console.log(screen.width);
+
 /* var slopecont = d3.select("body")
                     .append("svg") */
-var slopecont = d3.select("#slopesvg")
-                    .attr('width', "632px") //%
-                    .attr('height', slopeheight + slopemargin.top + slopemargin.bottom)
-                    .attr('id', "slopesvg")
-                    .append("g")
-                    // cause fail RWD
-                    //.attr('width', "50%")
-                    // in the end of rendering slope function, it will set correctly 'transform'
-                    // .attr('transform', "translate("+($("#slopesvg").width()/3)+","+slopemargin.top+")")
-                    // .attr('transform', "translate("+(slopemargin.left+30)+","+(slopemargin.top)+")")
-                    .attr('id', "slopeGroup");
+var slopecont;
 
-var lineCont = slopecont.append("g"), //left circle and line
+var lineCont, second_lineCont;
+
+// This is not good method. 'Ready' function should be put together.
+// But I want get more control about my graph and code, I choose to take 'ready' function apart.
+$(function(){
+    if(window.innerWidth < 768){
+        slopewidth = 400 - slopemargin.left - slopemargin.right, // for axis and line(circle)
+        slopeheight = 384 - slopemargin.top - slopemargin.bottom,
+        axiswidth = slopewidth + 10;
+    }
+
+    slopecont = d3.select("#slopesvg")
+    .attr('width', window.innerWidth >= 768 ? "632px" : "532px") //%
+    .attr('height', slopeheight + slopemargin.top + slopemargin.bottom)
+    .attr('id', "slopesvg")
+    .append("g")
+    // cause fail RWD
+    //.attr('width', "50%")
+    // in the end of rendering slope function, it will set correctly 'transform'
+    // .attr('transform', "translate("+($("#slopesvg").width()/3)+","+slopemargin.top+")")
+    // .attr('transform', "translate("+(slopemargin.left+30)+","+(slopemargin.top)+")")
+    .attr('id', "slopeGroup");
+
+    lineCont = slopecont.append("g"), //left circle and line
     second_lineCont = slopecont.append("g"); // right circle
+
+    render_slopeDiagram(data2016, undefined);
+
+    d3.selectAll(".div").attr('height', "500px");
+});
 
 function render_slopeDiagram(new_data, highlight_index){
 
@@ -190,7 +208,7 @@ function render_slopeDiagram(new_data, highlight_index){
         .text("年用水量佔全國比例")
         // .attr('x', $("#slopesvg").width()*3/5)
         // .attr('x', $("#slopeGroup").offset().left - $(".right-div").offset().left + $("#slopesvg").width()*1/2)
-        .attr('x', $("#slopeGroup").offset().left - $("#slopesvg").offset().left + $("#slopesvg").width()*0.55)
+        .attr('x', $("#slopeGroup").offset().left - $("#slopesvg").offset().left + $("#slopesvg").width()*0.4)
         //.attr('x', 350)
         .attr('y', slopeheight + slopemargin.top + slopemargin.bottom - 10)
         .attr('style', "fill: " + d3["schemeCategory10"][0] + "; font-size: 15px");
@@ -205,10 +223,10 @@ function render_slopeDiagram(new_data, highlight_index){
     console.log("hi"+($("#slopesvg").width()-(axiswidth + 30)));
     // 30 for axis tag, 
     // 15~20 for average visiblity of graph, because graph have axis tag 
-    d3.select("#slopeGroup").attr('transform', "translate("+($("#slopesvg").width()-(axiswidth + 30 - 20))/2+","+slopemargin.top+")");
+    var x_displace = ($("#slopesvg").width()-(axiswidth + 30 - 20))/2;
+    x_displace = window.innerWidth > 768 ? x_displace : (x_displace-30);
+    d3.select("#slopeGroup").attr('transform', "translate("+ x_displace +","+slopemargin.top+")");
 }
-
-render_slopeDiagram(data2016, undefined);
 
 // drop-down menu about "Region"
 function slopeReplyRegionMenu(region_index){
