@@ -79,17 +79,17 @@ p {
 }
 
 .left-div {
-    flex: 43 0 43%;
+    flex: 0 0 43%;
 }
 .middle-div {
-    flex: 14 0 14%;
+    flex: 1 0 14%;
 }
 .right-div {
-    flex: 43 0 43%;
+    flex: 0 0 43%;
 }
 
 .footer-div {
-    flex: 1 0 100%;
+    flex: 1;
     display: initial;
 }
 
