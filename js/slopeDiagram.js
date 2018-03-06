@@ -1,6 +1,6 @@
 var warning_color = "red", 
     normal_color = "#00BFFF",
-    color_set = d3["schemeSet3"];;
+    color_set = d3["schemeSet3"].slice(0,1).concat(d3["schemeSet3"].slice(2,6).concat(d3["schemeSet3"].slice(9)));
 
 var slopemargin = {top: 40, right: 40, bottom: 40, left: 60},
     slopewidth = 500 - slopemargin.left - slopemargin.right, // for axis and line(circle)
@@ -86,7 +86,7 @@ function render_slopeDiagram(new_data, highlight_index){
             .attr('y1', function(d,i){ return usedScale(d.population/total_population); })
             .attr('x2', slopewidth-20)
             .attr('y2', function(d,i){ return usedScale(d.consumption/total_consumption); })
-            .style('stroke', function(d,i){ return (i<=5)?color_set[i]:color_set[10]})            
+            .style('stroke', function(d,i){ return (i<=5)?color_set[i]:color_set[6]})            
             // .style('stroke', function(d){ return popScale(d.population/total_population)>conScale(d.consumption/total_consumption)?warning_color:normal_color;})
             .style('stroke-width', "2px")
             .on("end", function(d,i){

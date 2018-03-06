@@ -102,7 +102,7 @@ function updatePieChart(new_data, highlight_index){
            .attr('d', pieAttr)
            .attr('stroke', "initial")
            .each(function(d,i){
-                d3.select(this).attr('fill', (i<=5)?color_set[i]:color_set[10])
+                d3.select(this).attr('fill', (i<=5)?color_set[i]:color_set[6])
            })
            .on("end", function(d,i){
                 if(!d3.select(".myCheckbox").property("checked")){
