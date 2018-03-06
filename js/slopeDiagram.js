@@ -210,7 +210,7 @@ function render_slopeDiagram(new_data, highlight_index){
         // .attr('x', $("#slopeGroup").offset().left - $(".right-div").offset().left + $("#slopesvg").width()*1/2)
         .attr('x', (window.innerWidth > 768) ?
             ($("#slopeGroup").offset().left - $("#slopesvg").offset().left + $("#slopesvg").width()*0.5) : 
-            ($("#slopeGroup").offset().left - $("#slopesvg").offset().left + $("#slopesvg").width()*0.4))
+            ($("#slopeGroup").offset().left - $("#slopesvg").offset().left + $("#slopesvg").width()*0.45))
         //.attr('x', 350)
         .attr('y', slopeheight + slopemargin.top + slopemargin.bottom - 10)
         .attr('style', "fill: " + d3["schemeCategory10"][0] + "; font-size: 15px");
