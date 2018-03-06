@@ -9,7 +9,7 @@ var pieAttr = pie.innerRadius(0)
 
 var pieScale = d3.arc()
                 .innerRadius(0)
-                .outerRadius(220)
+                .outerRadius(225)
                 .cornerRadius(3)
                 .padAngle(0.005)
                 .padRadius(200);
@@ -79,7 +79,7 @@ function updatePieChart(new_data, highlight_index){
            .attr('d', pieAttr)
            .attr('stroke', "initial")
            .each(function(d,i){
-                d3.select(this).attr('fill', (i<=5)?color_set[i]:color_set[7])
+                d3.select(this).attr('fill', (i<=5)?color_set[i]:color_set[10])
            })
            .on("end", function(d,i){
                 if(!d3.select(".myCheckbox").property("checked")){
@@ -284,27 +284,26 @@ function highlightAPie(i, pieTextId, pieId){
 function updateTextInfo(i){
     // display detail info of a region
     // display ranking of consumption of water
-    if(d3.select("#drop-down-region").property("value") != "---"){
-        $("#region-name, #region-rank, #region-population, #region-consumption, #region-more-water-s").attr("style", "visibility: visible;");
-        $("#region-name").html(pieData[i].label);
-        $("#region-rank").html("用水排名: " + (i+1));
+    if(d3.select("#drop-down-region").property("value") == "---"){
+        i = 0;
+    }
+
+    $("#region-name, #region-rank, #region-population, #region-consumption, #region-more-water-s").attr("style", "visibility: visible;");
+    $("#region-name").html(pieData[i].label);
+    $("#region-rank").html("用水排名: " + (i+1));
 /*         $("#region-population").html("用水人口數: " + population_list[i] + " 人("+ ((population_list[i]/total_population)*100).toFixed(2) + "%)");
-        $("#region-consumption").html("用水量: " + consumption_list[i] + " 千公升("+ ((consumption_list[i]/total_consumption)*100).toFixed(2) + "%)"); */
-        $("#region-population").html("用水人口數: " + population_list[i] + " 人");
-        $("#region-consumption").html("用水量: " + consumption_list[i] + " 千公升");
-        $("#focus-more-water-s").html(function(){
-            var i = 0, count = 1, concated_str = "";
-            for (let i = 0; i < region_list.length; i++) {
-                if((consumption_list[i]/total_consumption) > (population_list[i]/total_population)){
-                    count = count==3?1:count+1;
-                    concated_str = concated_str + region_list[i] + "," + (count == 1?"<br>":"");
-                }
-                    
+    $("#region-consumption").html("用水量: " + consumption_list[i] + " 千公升("+ ((consumption_list[i]/total_consumption)*100).toFixed(2) + "%)"); */
+    $("#region-population").html("用水人口數: " + population_list[i] + " 人");
+    $("#region-consumption").html("用水量: " + consumption_list[i] + " 千公升");
+    $("#focus-more-water-s").html(function(){
+        var i = 0, count = 1, concated_str = "";
+        for (let i = 0; i < region_list.length; i++) {
+            if((consumption_list[i]/total_consumption) > (population_list[i]/total_population)){
+                count = count==3?1:count+1;
+                concated_str = concated_str + region_list[i] + "," + (count == 1?"<br>":"");
             }
-            return concated_str.slice(0,concated_str.length-1) + " ";
-        });
-    }
-    else{
-        $("#region-name, #region-rank, #region-population, #region-consumption, #region-more-water-s").attr("style", "visibility: hidden;");
-    }
+                
+        }
+        return concated_str.slice(0,concated_str.length-1) + " ";
+    });
 }

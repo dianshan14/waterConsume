@@ -68,7 +68,7 @@ function render_slopeDiagram(new_data, highlight_index){
             .attr('y1', function(d,i){ return usedScale(d.population/total_population); })
             .attr('x2', slopewidth-20)
             .attr('y2', function(d,i){ return usedScale(d.consumption/total_consumption); })
-            .style('stroke', function(d,i){ return (i<=5)?color_set[i+2]:color_set[0]})            
+            .style('stroke', function(d,i){ return (i<=5)?color_set[i]:color_set[10]})            
             // .style('stroke', function(d){ return popScale(d.population/total_population)>conScale(d.consumption/total_consumption)?warning_color:normal_color;})
             .style('stroke-width', "2px")
             .on("end", function(d,i){

@@ -27,4 +27,6 @@
 		* time of display of footer is wrong
 		* some text should be more better
 		* style of circle of right graph shoud be changed  
-	
+* 2018/03/06
+	* time of display of footer is correct
+	* sync color of graph
