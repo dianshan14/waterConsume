@@ -34,3 +34,4 @@
 * 2018/03/10 update
 	* responsive for Mac and iPad
 	* revise some css 
+	* revise graph size

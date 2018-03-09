@@ -25,7 +25,7 @@ $(function(){
     }
 
     slopecont = d3.select("#slopesvg")
-    .attr('width', window.innerWidth >= 768 ? "582" : "482") //%
+    .attr('width', window.innerWidth >= 768 ? "542" : "442") //%
     .attr('height', slopeheight + slopemargin.top + slopemargin.bottom + 100)
     .attr('id', "slopesvg")
     .append("g")
@@ -209,7 +209,7 @@ function render_slopeDiagram(new_data, highlight_index){
         // .attr('x', $("#slopesvg").width()*3/5)
         // .attr('x', $("#slopeGroup").offset().left - $(".right-div").offset().left + $("#slopesvg").width()*1/2)
         .attr('x', (window.innerWidth > 768) ?
-            582 - 220 : 482 - 240)
+            542 - 220 : 442 - 240)
         //.attr('x', 350)
         .attr('y', slopeheight + 2*slopemargin.top + slopemargin.bottom - 10)
         .attr('style', "fill: " + d3["schemeCategory10"][0] + "; font-size: 15px");
