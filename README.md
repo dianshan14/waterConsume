@@ -31,3 +31,6 @@
 	* time of display of footer is correct
 	* sync color of graph
 	* Responsive design for SVG graph
+* 2018/03/10 update
+	* responsive for Mac and iPad
+	* revise some css 
