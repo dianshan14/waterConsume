@@ -200,7 +200,7 @@ function render_slopeDiagram(new_data, highlight_index){
         // .attr('x', $("#slopeGroup").offset().left - $(".right-div").offset().left)
         .attr('x', 40)
         //.attr('x', 30)
-        .attr('y', slopeheight + 2*slopemargin.top + slopemargin.bottom - 10)
+        .attr('y', slopeheight + 1.3*slopemargin.top + slopemargin.bottom - 10)
         .attr('style', "fill: " + d3["schemeCategory10"][0] + "; font-size: 15px");
         
         d3.select("#slopesvg")
@@ -209,9 +209,9 @@ function render_slopeDiagram(new_data, highlight_index){
         // .attr('x', $("#slopesvg").width()*3/5)
         // .attr('x', $("#slopeGroup").offset().left - $(".right-div").offset().left + $("#slopesvg").width()*1/2)
         .attr('x', (window.innerWidth > 768) ?
-            542 - 220 : 442 - 240)
+            542 - 220 : 442 - 220)
         //.attr('x', 350)
-        .attr('y', slopeheight + 2*slopemargin.top + slopemargin.bottom - 10)
+        .attr('y', slopeheight + 1.3*slopemargin.top + slopemargin.bottom - 10)
         .attr('style', "fill: " + d3["schemeCategory10"][0] + "; font-size: 15px");
     }
 
@@ -225,8 +225,8 @@ function render_slopeDiagram(new_data, highlight_index){
     // 30 for axis tag, 
     // 15~20 for average visiblity of graph, because graph have axis tag 
     var x_displace = ($("#slopesvg").width()-(axiswidth + 30 - 45))/2;
-    x_displace = window.innerWidth > 768 ? x_displace : (x_displace-40);
-    d3.select("#slopeGroup").attr('transform', "translate("+ x_displace +","+(2*slopemargin.top)+")");
+    x_displace = window.innerWidth > 768 ? x_displace : (x_displace-20);
+    d3.select("#slopeGroup").attr('transform', "translate("+ x_displace +","+(1.3*slopemargin.top)+")");
 }
 
 // drop-down menu about "Region"
