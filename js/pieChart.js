@@ -1,3 +1,7 @@
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 var color_set = d3["schemeSet3"];
 var pie = d3.arc();
 var region_list = [], population_list = [], consumption_list = [];
@@ -72,8 +76,8 @@ function updatePieChart(new_data, highlight_index){
     // display extra data under pie chart
     if(signal == 1){
         $("#pie-year").html(d3.select("#drop-down-year").property("value").slice(4) + " 年");
-        $("#pie-total-population").html("總用水人口數量 ： " + total_population + "  人");
-        $("#pie-total-consumption").html("總用水量： " + total_consumption + " 千公升");
+        $("#pie-total-population").html("總用水人口數量 ： " + numberWithCommas(total_population) + "  人");
+        $("#pie-total-consumption").html("總用水量： " + numberWithCommas(total_consumption) + " 千公升");
     }
 
     // get the pie chart data
@@ -314,8 +318,8 @@ function updateTextInfo(i){
     $("#region-rank").html("用水排名: " + (i+1));
 /*         $("#region-population").html("用水人口數: " + population_list[i] + " 人("+ ((population_list[i]/total_population)*100).toFixed(2) + "%)");
     $("#region-consumption").html("用水量: " + consumption_list[i] + " 千公升("+ ((consumption_list[i]/total_consumption)*100).toFixed(2) + "%)"); */
-    $("#region-population").html("用水人口數: " + population_list[i] + " 人");
-    $("#region-consumption").html("用水量: " + consumption_list[i] + " 千公升");
+    $("#region-population").html("用水人口數: " + numberWithCommas(population_list[i]) + " 人");
+    $("#region-consumption").html("用水量: " + numberWithCommas(consumption_list[i]) + " 千公升");
     $("#focus-more-water-s").html(function(){
         var i = 0, count = 1, concated_str = "";
         for (let i = 0; i < region_list.length; i++) {
