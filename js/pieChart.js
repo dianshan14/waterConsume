@@ -161,6 +161,8 @@ d3.select("#drop-down-year")
   .on("change", function(){
     signal = 1;
 
+    alert("debugging!"); 
+
     if(d3.select("#drop-down-year").property("value") == "---"){
         d3.select("#container-div").style('display', "none");
         return;
