@@ -258,6 +258,7 @@ function SVG_response(){
 
 d3.select("#drop-down-region")
 .on("change", function(){
+    alert("d3 region alern");
     if(!d3.select(".myCheckbox").property("checked")){
         if(signal == 1)
         {
