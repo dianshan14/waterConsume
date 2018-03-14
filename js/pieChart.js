@@ -157,14 +157,9 @@ function updatePieChart(new_data, highlight_index){
     new_text.exit().transition().remove();
 }
 
-/* d3.select("#drop-down-year")
-  .on("change", function(){ */
-
-$("#drop-down-year").change(function (){
+d3.select("#drop-down-year")
+  .on("change", function(){
     signal = 1;
-
-    alert("debugging!"); 
-    alert($(this));
 
     if(d3.select("#drop-down-year").property("value") == "---"){
         d3.select("#container-div").style('display', "none");
@@ -258,7 +253,6 @@ function SVG_response(){
 
 d3.select("#drop-down-region")
 .on("change", function(){
-    alert("d3 region alern");
     if(!d3.select(".myCheckbox").property("checked")){
         if(signal == 1)
         {
