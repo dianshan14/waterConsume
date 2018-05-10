@@ -35,3 +35,6 @@
 	* responsive for Mac and iPad
 	* revise some css 
 	* revise graph size
+
+---
+* Project be temporarily accomplished
