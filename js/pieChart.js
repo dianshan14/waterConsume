@@ -42,11 +42,11 @@ $(function(){
         .outerRadius(175)
         .cornerRadius(3)
         .padAngle(0.005)
-        .padRadius(175);    
+        .padRadius(175);
     }
 
     cont = d3.select("#piesvg")
-    .attr('width', window.innerWidth >= 768 ? "480" : "400") 
+    .attr('width', window.innerWidth >= 768 ? "480" : "400")
     .attr('height', window.innerWidth >= 768 ? "450" : "375")
     .attr('id', "piesvg")
     .append("g")
@@ -78,8 +78,8 @@ function updatePieChart(new_data, highlight_index){
     var doublePi = 2*Math.PI;
     for (var j = 0; j < data_source.length; j++) {
         var elem = data_source[j];
-        pieData.push({  label: elem.region, 
-                        startAngle: (j===0)?0:pieData[j-1].endAngle, 
+        pieData.push({  label: elem.region,
+                        startAngle: (j===0)?0:pieData[j-1].endAngle,
                         endAngle: (j===(data_source.length-1))?doublePi:(j===0)?doublePi*(elem.consumption/total_consumption):doublePi*(elem.consumption/total_consumption)+pieData[j-1].endAngle
                     })
     }
@@ -87,14 +87,14 @@ function updatePieChart(new_data, highlight_index){
     var pieId = "#pie"+highlight_index,
     pieTextId = "#pietext"+highlight_index;
 
-    var new_pie = cont.selectAll(".pieGroup") 
+    var new_pie = cont.selectAll(".pieGroup")
                       .data(pieData);
-    
+
     new_pie.enter()
            .append("path")
            .attr('id', function(d,i){ return "pie"+i; })
            .attr('class', "pieGroup");
-           
+
     new_pie.transition()
            .attr('d', pieAttr)
            .attr('stroke', "initial")
@@ -112,7 +112,7 @@ function updatePieChart(new_data, highlight_index){
 
     var new_text = cont.selectAll(".textGroup")
                        .data(pieData);
-    
+
     new_text.enter()
             .append("text")
             .attr('id', function(d,i){ return "pietext"+i; })
@@ -134,7 +134,7 @@ function updatePieChart(new_data, highlight_index){
                     highlightAPie(highlight_index,pieTextId,pieId);
                 }
             });
-    
+
     new_text.exit().transition().remove();
 }
 
@@ -166,13 +166,13 @@ d3.select("#drop-down-year")
             region_list = [];
             population_list = [];
             consumption_list = [];
-            
+
             new_data_source.sort(function(a, b){
-                if(a.consumption > b.consumption) return -1; 
-                else if (a.consumption < b.consumption) return 1; 
-                else return 0; 
+                if(a.consumption > b.consumption) return -1;
+                else if (a.consumption < b.consumption) return 1;
+                else return 0;
             });
-        
+
             for (var i = 0; i < new_data_source.length; i++) {
                 var element = new_data_source[i];
                 region_list.push(element.region);
@@ -213,9 +213,9 @@ d3.select("#drop-down-region")
             }
 
             highlightAPie(i, pieTextId, pieId);
-        } 
+        }
         slopeReplyRegionMenu(i);
-        updateTextInfo(i); 
+        updateTextInfo(i);
     }
 });
 
@@ -228,7 +228,7 @@ function recoverPie(){
         else
             d3.select(this).text("");
     });
-    
+
     d3.selectAll(".pieGroup")
     .attr('stroke', "none")
     .attr('d', pieAttr);;
@@ -239,7 +239,7 @@ function highlightAPie(i, pieTextId, pieId){
     .style('fill', "black")
     .text(region_list[i]);
 
-    
+
     d3.select(pieId)
     .attr('stroke', "white")
     .attr('stroke-width', "0px")
@@ -263,7 +263,7 @@ function updateTextInfo(i){
                 count = count==3?1:count+1;
                 concated_str = concated_str + region_list[i] + "," + (count == 1?"<br>":"");
             }
-                
+
         }
         return concated_str.slice(0,concated_str.length-1) + " ";
     });
